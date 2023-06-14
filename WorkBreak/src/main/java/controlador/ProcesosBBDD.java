@@ -59,22 +59,30 @@ public class ProcesosBBDD {
 	}
 
 	public List<Empleado> recuperarEmpleado(String id) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		Query query = null;
+		List<Empleado> empleadoId = null;
 
-		Query query = em.createQuery("SELECT e FROM Empleado e WHERE e.id = " + id);
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		List<Empleado> empleadoId = query.getResultList();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			query = em.createQuery("SELECT e FROM Empleado e WHERE e.id = " + id);
+
+			empleadoId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Empleado vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return empleadoId;
 	}
-	
+
 	public void modificarEmpleado(Empleado empleado) {
 		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
@@ -95,7 +103,7 @@ public class ProcesosBBDD {
 
 		JOptionPane.showMessageDialog(null,
 				"El Empleado con ID: " + empleado.getId() + " ha sido modificado correctamente");
-		
+
 	}
 
 	public List<Empleado> eliminarEmpleado(String id) {
@@ -156,20 +164,28 @@ public class ProcesosBBDD {
 	}
 
 	public List<Desarrollador> recuperarDesarrollador(String id) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		Query query = null;
+		List<Desarrollador> desarrolladorId = null;
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		Query query = em.createQuery("SELECT d FROM Desarrollador d WHERE d.id = " + id);
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		List<Desarrollador> desarrolladorId = query.getResultList();
+			query = em.createQuery("SELECT d FROM Desarrollador d WHERE d.id = " + id);
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			desarrolladorId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Desarrollador vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return desarrolladorId;
+
 	}
 
 	public void modificarDesarrollador(Desarrollador desarrollador) {
@@ -198,37 +214,56 @@ public class ProcesosBBDD {
 	}
 
 	public List<Desarrollador> recuperarDesarrolladorPorJefeId(String jefeId) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		Query query = null;
+		List<Desarrollador> desarrolladorJefeId = null;
 
-		Query query = em.createQuery("SELECT d FROM Desarrollador d WHERE id_jefeEquipo = " + jefeId);
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		List<Desarrollador> desarrolladorJefeId = query.getResultList();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			query = em.createQuery("SELECT d FROM Desarrollador d WHERE id_jefeEquipo = " + jefeId);
+
+			desarrolladorJefeId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Jefe Equipo vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return desarrolladorJefeId;
+
 	}
 
 	public List<Desarrollador> recuperarDesarrolladorPorProyectoId(String proyectoId) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
+		
+		Query query = null;
+		List<Desarrollador> desarrolladorProyectoId = null;
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		Query query = em.createQuery("SELECT d FROM Desarrollador d WHERE id_proyecto = " + proyectoId);
+			query = em.createQuery("SELECT d FROM Desarrollador d WHERE id_proyecto = " + proyectoId);
 
-		List<Desarrollador> desarrolladorProyectoId = query.getResultList();
+			desarrolladorProyectoId = query.getResultList();
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
-
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Proyecto vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
 		return desarrolladorProyectoId;
+		
 	}
 
 	public List<Desarrollador> eliminarDesarrollador(String id) {
@@ -289,18 +324,26 @@ public class ProcesosBBDD {
 	}
 
 	public List<JefeEquipo> recuperarJefeEquipo(String id) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		Query query = null;
+		List<JefeEquipo> jefeEquipoId = null;
 
-		Query query = em.createQuery("SELECT j FROM JefeEquipo j WHERE j.id = " + id);
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		List<JefeEquipo> jefeEquipoId = query.getResultList();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			query = em.createQuery("SELECT j FROM JefeEquipo j WHERE j.id = " + id);
+
+			jefeEquipoId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Jefes de Equipo vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return jefeEquipoId;
 	}
@@ -408,36 +451,52 @@ public class ProcesosBBDD {
 	}
 
 	public List<Proyecto> recuperarProyecto(String id) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
+		Query query = null;
+		List<Proyecto> proyectoId = null;
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		Query query = em.createQuery("SELECT p FROM Proyecto p WHERE p.id = " + id);
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		List<Proyecto> proyectoId = query.getResultList();
+			query = em.createQuery("SELECT p FROM Proyecto p WHERE p.id = " + id);
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			proyectoId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Proyecto vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 
 		return proyectoId;
 	}
 
 	public List<Proyecto> recuperarProyectoPorJefeId(String jefeId) {
-		emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		em = emf.createEntityManager();
-		em.getTransaction().begin();
+		Query query = null;
+		List<Proyecto> proyectoJefeId = null;
 
-		Query query = em.createQuery("SELECT p FROM Proyecto p WHERE id_jefeEquipo = " + jefeId);
+		try {
+			emf = Persistence.createEntityManagerFactory("ProyectoWorkBreak");
 
-		List<Proyecto> proyectoJefeId = query.getResultList();
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
 
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+			query = em.createQuery("SELECT p FROM Proyecto p WHERE id_jefeEquipo = " + jefeId);
 
+			proyectoJefeId = query.getResultList();
+
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Campo ID Jefe de Proyecto vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 		return proyectoJefeId;
 	}
 
@@ -463,7 +522,5 @@ public class ProcesosBBDD {
 				"El Proyeto con ID: " + proyecto.getId() + " ha sido modificado correctamente");
 
 	}
-
-
 
 }
